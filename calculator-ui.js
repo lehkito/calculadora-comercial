@@ -1,3 +1,4 @@
+const CalcEngine={coord(a){const m=a.match(/([A-Z]+)(\d+)/);return {c:[...m[1]].reduce((v,x)=>v*26+x.charCodeAt(0)-64,0),r:+m[2]}},letter(n){let s='';while(n){const r=(n-1)%26;s=String.fromCharCode(65+r)+s;n=Math.floor((n-1)/26)}return s}};
 let DATA=[],engine=null,visible=[],selected=0,scenario=4,filters='';const fiscalState={};const $=s=>document.querySelector(s);const UF=['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO'];let latestRegional={},quoteErrors=[];
 const escape=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 const fmt=(v,d=2)=>typeof v==='number'?v.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d}):String(v??'');const money=v=>'R$ '+fmt(v,2);function read(s,a){try{return {v:engine.get(s,a)}}catch(e){return {error:e.message}}}function current(){return DATA[selected]}
